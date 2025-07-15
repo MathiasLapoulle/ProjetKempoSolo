@@ -1,0 +1,277 @@
+/* Table Container */
+.table-container {
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+/* Table Styling */
+.tournament-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+/* Table Header */
+.tournament-table thead {
+  background: #2c3e50;
+  color: white;
+}
+
+.tournament-table th {
+  padding: 12px;
+  font-size: 16px;
+}
+
+/* Table Rows */
+.tournament-table tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.tournament-table td {
+  padding: 12px;
+}
+
+/* Alternate Row Background */
+.tournament-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* Button Styling - Voir Détails */
+.details-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.details-btn:hover {
+  background: #0056b3;
+}
+
+/* Modifier Button */
+.edit-btn {
+  background: #28a745; /* Green */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.edit-btn:hover {
+  background: #218838;
+}
+
+/* Supprimer Button */
+.delete-btn {
+  background: #dc3545; /* Red */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+/* Action Buttons Layout */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.tableTitle {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.filterSection {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.createTournamentSection {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #666;
+}
+
+.tableContainer {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.tournamentTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.tournamentTable th,
+.tournamentTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+.tournamentTable th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.tournamentTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.launchBtn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.launchBtn:hover {
+  background-color: #218838;
+}
+
+.actionIcons {
+  display: flex;
+  gap: 8px;
+}
+
+.editBtn, .deleteBtn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.editBtn {
+  color: #17a2b8;
+}
+
+.deleteBtn {
+  color: #dc3545;
+}
+
+.noData {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .topSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filterSection {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .tournamentTable th, .tournamentTable td {
+    padding: 8px;
+  }
+  
+  .actionButtons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.infoMessage {
+  background-color: #fff8e5;
+  border: 1px solid #ffd43b;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeInfoBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #666;
+}
+
+.closeInfoBtn:hover {
+  color: #333;
+}
+
+.unregisterBtn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.unregisterBtn:hover {
+  background-color: #c82333;
+}

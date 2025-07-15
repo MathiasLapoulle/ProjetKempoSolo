@@ -1,0 +1,34 @@
+/* Ranking Table Styles */
+.rankingTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.rankingTable th, 
+.rankingTable td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.rankingTable th {
+    background: #093a5e;
+    color: white;
+}
+
+.gold {
+    background-color: #f7e08f;
+}
+
+.silver {
+    background-color: #d4d4d4;
+}
+
+.bronze {
+    background-color: #e2b48a;
+}

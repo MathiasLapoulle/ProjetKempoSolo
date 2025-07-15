@@ -1,0 +1,122 @@
+/* Sidebar Container */
+a{
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  height: 100vh;
+  background-color: #0f1d33; /* Dark blue */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* User Info - Logo Section */
+.user-info {
+  text-align: center;
+  padding: 15px;
+}
+
+.logo {
+  width: 160px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Separators between blocks */
+.separator {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 8px 15px;
+}
+
+/* Nav Block - Groups of links */
+.navBlock {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 0;
+}
+
+/* Individual nav links */
+.navLink {
+  text-decoration: none;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.navLink:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Nav item structure */
+.navItem {
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Icon in each nav item */
+.navIcon {
+  margin-right: 12px;
+  font-size: 16px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Text in each nav item */
+.navText {
+  font-size: 14px;
+}
+
+/* Spacer to push items to bottom */
+.spacer {
+  flex-grow: 1;
+}
+
+/* Utility classes for active states */
+.activeLink {
+  background-color: #1c2e4a;
+  border-left: 4px solid #4d7eff;
+}
+
+/* Responsive behavior */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 70px;
+    min-width: 70px;
+  }
+  
+  .navText {
+    display: none;
+  }
+  
+  .navIcon {
+    font-size: 20px;
+    margin-right: 0;
+  }
+  
+  .navItem {
+    justify-content: center;
+    padding: 16px 0;
+  }
+
+  .logo {
+    width: 40px;
+  }
+}

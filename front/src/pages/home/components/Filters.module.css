@@ -1,0 +1,106 @@
+/* Filters Container - Centering */
+.filtersContainer {
+  display: flex;
+  align-items: center; 
+  justify-content: center;  /* Center horizontally */
+  flex-wrap: wrap; /* Ensures responsiveness */
+  gap: 20px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Full width for centering */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+}
+
+/* Filter Item (Label + Input) */
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the items inside */
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Label Styling */
+.filterItem label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers label text */
+  gap: 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+.searchInput, .dateInput, .selectInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.searchInput:focus, .dateInput:focus, .selectInput:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.searchIcon, .calendarIcon, .categoryIcon {
+  margin-right: 6px;
+  font-style: normal;
+}
+
+/* Inputs & Selects */
+.filterItem input,
+.filterItem select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center; /* Centers text inside input */
+}
+
+@media (max-width: 768px) {
+  .filterRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .filterItem {
+    width: 100%;
+  }
+}
+
+/* Center the Create Button */
+.createBtn {
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button Hover */
+.createBtn:hover {
+  background-color: #007bff; /* Change background color on hover */
+  color: #fff; /* Ensure text remains visible */
+}

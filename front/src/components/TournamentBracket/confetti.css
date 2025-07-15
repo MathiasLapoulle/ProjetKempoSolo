@@ -1,0 +1,85 @@
+/* Animation de confettis pour le champion du tournoi */
+.confetti::before,
+.confetti::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  transform-origin: 50% 50%;
+  animation: confetti 5s ease-in-out infinite;
+}
+
+.confetti::before {
+  background-color: #f94144;
+  animation-delay: 0s;
+}
+
+.confetti::after {
+  background-color: #f3722c;
+  animation-delay: 0.5s;
+}
+
+.confetti:nth-child(1)::before,
+.confetti:nth-child(1)::after {
+  animation-delay: 0s;
+}
+
+.confetti:nth-child(2)::before,
+.confetti:nth-child(2)::after {
+  animation-delay: 0.3s;
+}
+
+.confetti:nth-child(1)::before {
+  top: 0;
+  left: 0;
+}
+
+.confetti:nth-child(1)::after {
+  top: 0;
+  right: 0;
+}
+
+.confetti:nth-child(2)::before {
+  bottom: 0;
+  left: 0;
+}
+
+.confetti:nth-child(2)::after {
+  bottom: 0;
+  right: 0;
+}
+
+@keyframes confetti {
+  0% {
+    transform: rotate(0deg) translateY(0) scale(0);
+  }
+  10% {
+    transform: rotate(45deg) translateY(-10px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(160deg) translateY(-40px) scale(0.7);
+    opacity: 0.7;
+  }
+  90% {
+    transform: rotate(300deg) translateY(-70px) scale(0.3);
+    opacity: 0.3;
+  }
+  100% {
+    transform: rotate(360deg) translateY(-80px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Ajout de plusieurs confettis avec des couleurs différentes */
+.confetti:nth-child(1)::before { background-color: #f94144; animation-duration: 4s; }
+.confetti:nth-child(1)::after { background-color: #f3722c; animation-duration: 4.5s; }
+.confetti:nth-child(2)::before { background-color: #f8961e; animation-duration: 5s; }
+.confetti:nth-child(2)::after { background-color: #f9c74f; animation-duration: 5.5s; }
+
+/* Ajout de confettis supplémentaires avec ::nth-of-type */
+.confetti:nth-of-type(1)::before { background-color: #90be6d; animation-duration: 3.8s; }
+.confetti:nth-of-type(1)::after { background-color: #43aa8b; animation-duration: 4.2s; }
+.confetti:nth-of-type(2)::before { background-color: #577590; animation-duration: 4.8s; }
+.confetti:nth-of-type(2)::after { background-color: #277da1; animation-duration: 5.3s; }
