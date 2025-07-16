@@ -162,7 +162,7 @@ jobs:
         npm run lint --silent > ../frontend-lint.txt 2>&1 || echo "Frontend linting completed"
     
     - name: Upload Lint Reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: lint-reports
         path: |
