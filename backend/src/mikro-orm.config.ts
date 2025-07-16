@@ -12,12 +12,32 @@ import { Migrator } from '@mikro-orm/migrations';
 import { SeedManager } from '@mikro-orm/seeder';
 import { UserSchema } from './entities/user.entity.ts';
 
+// Parse DATABASE_URL for production
+const getDatabaseConfig = () => {
+  if (process.env.DATABASE_URL) {
+    const url = new URL(process.env.DATABASE_URL);
+    return {
+      host: url.hostname,
+      port: parseInt(url.port) || 3306,
+      user: url.username,
+      password: url.password,
+      dbName: url.pathname.substring(1), // Remove leading slash
+    };
+  }
+  
+  return {
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '3306'),
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || 'root',
+    dbName: process.env.DB_NAME || 'kempo_db',
+  };
+};
+
+const dbConfig = getDatabaseConfig();
+
 export default defineConfig({
-  dbName: 'kempo_db',
-  user: 'root',
-  password: 'root',
-  host: 'localhost',
-  port: 3306, // Port MySQL par défaut
+  ...dbConfig,
   entities: [
     Tournament, 
     Category, 
