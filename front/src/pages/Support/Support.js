@@ -4,7 +4,7 @@ import styles from './Support.module.css';
 const Support = () => {
   const handleSupportClick = () => {
     // Ouvrir le lien de support dans un nouvel onglet
-    window.open('https://kempo-tournois.atlassian.net/servicedesk/customer/portal/34', '_blank');
+    window.open('https://kempo-solo-project.atlassian.net/servicedesk/customer/portal/1', '_blank');
   };
 
   return (
@@ -90,7 +90,7 @@ const Support = () => {
       <div className={styles.footer}>
         <p>
           Vous pouvez également nous contacter directement par email à : 
-          <a href="mailto:support@kemposolo.com"> support@kemposolo.com</a>
+          <a href="mailto:support@kempo-solo-project.atlassian.net"> support@kemposolo.com</a>
         </p>
       </div>
     </div>
