@@ -82,7 +82,7 @@ const CompetitorTable = () => {
           await loadCompetitors(); // Reload to get updated data
         } else {
           alert('Erreur lors de la suppression: ' + result.error);
-        }https://rmcsport.bfmtv.com/rss/rugby/coupe-d-europe/
+        }
       } catch (error) {
         alert('Erreur lors de la suppression du compétiteur');
         console.error('Error deleting competitor:', error);

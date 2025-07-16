@@ -16,6 +16,7 @@ import Register from "./pages/Auth/Register";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import ResetPassword from "./pages/Auth/ResetPassword";
 import Profile from "./pages/Profile";
+import Support from "./pages/Support";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path='/reset-password/:userId/:token' element={<div className='content'><ResetPassword /></div>} />
           <Route path='/bracket-demo' element={<div className='content'><TournamentBracketDemo /></div>} />
           <Route path='/bracket-example' element={<div className='content'><BracketExample /></div>} />
+          <Route path='/support' element={<div className='content'><Support /></div>} />
           
           {/* Routes accessibles aux utilisateurs connectés (user et admin) */}
           <Route path='/profile' element={

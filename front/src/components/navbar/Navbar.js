@@ -143,6 +143,12 @@ const NavBar = () => {
                                 <span className={style.navText}>Déconnexion</span>
                             </div>
                         </div>
+                        <Link to="/support" className={style.navLink}>
+                            <div className={style.navItem}>
+                                <span className={style.navIcon}>👾</span>
+                                <span className={style.navText}>Support</span>
+                            </div>
+                        </Link>
                     </>
                 ) : (
                     <>
@@ -157,6 +163,12 @@ const NavBar = () => {
                             <div className={style.navItem}>
                                 <span className={style.navIcon}>📝</span>
                                 <span className={style.navText}>Inscription</span>
+                            </div>
+                        </Link>
+                        <Link to="/support" className={style.navLink}>
+                            <div className={style.navItem}>
+                                <span className={style.navIcon}>👾</span>
+                                <span className={style.navText}>Support</span>
                             </div>
                         </Link>
                     </>
