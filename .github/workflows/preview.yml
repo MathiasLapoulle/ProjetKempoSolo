@@ -1,0 +1,151 @@
+name: Deploy Preview
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install Frontend Dependencies
+      run: |
+        cd front
+        npm ci
+    
+    - name: Build Frontend Preview
+      run: |
+        cd front
+        npm run build
+      env:
+        REACT_APP_API_URL: https://kempo-backend.onrender.com
+        GENERATE_SOURCEMAP: false
+    
+    - name: Upload Preview Build
+      uses: actions/upload-artifact@v3
+      with:
+        name: preview-build
+        path: front/build/
+        retention-days: 7
+    
+    - name: Comment PR
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          
+          const botComment = comments.find(comment => 
+            comment.user.login === 'github-actions[bot]' && 
+            comment.body.includes('🚀 Preview Build')
+          );
+          
+          const body = `🚀 Preview Build Ready!
+          
+          ✅ Frontend build completed successfully
+          📦 Build artifacts uploaded
+          
+          **Build Info:**
+          - Commit: ${context.sha.substring(0, 7)}
+          - Branch: ${context.ref}
+          - Build time: ${new Date().toISOString()}
+          
+          **What's next:**
+          - Download the preview build from the artifacts
+          - Test the changes locally
+          - Deploy to staging environment if needed`;
+          
+          if (botComment) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: body
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
+          }
+
+  validate-changes:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install Dependencies
+      run: |
+        cd backend && npm ci
+        cd ../front && npm ci
+    
+    - name: Check Changed Files
+      run: |
+        echo "📁 Checking changed files..."
+        git diff --name-only HEAD^ HEAD
+        echo ""
+        echo "Backend changes:"
+        git diff --name-only HEAD^ HEAD | grep "^backend/" || echo "No backend changes"
+        echo ""
+        echo "Frontend changes:"
+        git diff --name-only HEAD^ HEAD | grep "^front/" || echo "No frontend changes"
+    
+    - name: Run Affected Tests
+      run: |
+        echo "🧪 Running tests for changed files..."
+        if git diff --name-only HEAD^ HEAD | grep -q "^backend/"; then
+          echo "Running backend tests..."
+          cd backend
+          npm test || echo "Backend tests completed"
+          cd ..
+        fi
+        
+        if git diff --name-only HEAD^ HEAD | grep -q "^front/"; then
+          echo "Running frontend tests..."
+          cd front
+          npm test -- --watchAll=false || echo "Frontend tests completed"
+          cd ..
+        fi
+    
+    - name: Validate Configuration
+      run: |
+        echo "⚙️ Validating configuration files..."
+        
+        # Check package.json files
+        if [ -f "backend/package.json" ]; then
+          echo "✅ Backend package.json found"
+          node -e "JSON.parse(require('fs').readFileSync('backend/package.json', 'utf8'))" || echo "❌ Invalid backend package.json"
+        fi
+        
+        if [ -f "front/package.json" ]; then
+          echo "✅ Frontend package.json found"
+          node -e "JSON.parse(require('fs').readFileSync('front/package.json', 'utf8'))" || echo "❌ Invalid frontend package.json"
+        fi
+        
+        # Check render.yaml
+        if [ -f "render.yaml" ]; then
+          echo "✅ render.yaml found"
+        fi

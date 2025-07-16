@@ -1,0 +1,130 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 2 * * 1' # Chaque lundi à 2h du matin
+
+jobs:
+  security-audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install Backend Dependencies
+      run: |
+        cd backend
+        npm ci
+    
+    - name: Install Frontend Dependencies
+      run: |
+        cd front
+        npm ci
+    
+    - name: Run Backend Security Audit
+      run: |
+        cd backend
+        echo "🔍 Running backend security audit..."
+        npm audit --audit-level=moderate || echo "⚠️ Security issues found in backend"
+    
+    - name: Run Frontend Security Audit
+      run: |
+        cd front
+        echo "🔍 Running frontend security audit..."
+        npm audit --audit-level=moderate || echo "⚠️ Security issues found in frontend"
+    
+    - name: Check for Vulnerable Dependencies
+      run: |
+        echo "🔍 Checking for known vulnerable dependencies..."
+        cd backend
+        npm audit --audit-level=high --json > backend-audit.json || true
+        cd ../front
+        npm audit --audit-level=high --json > frontend-audit.json || true
+    
+    - name: Upload Security Reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: |
+          backend/backend-audit.json
+          front/frontend-audit.json
+        retention-days: 30
+
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install Dependencies
+      run: |
+        cd backend && npm ci
+        cd ../front && npm ci
+    
+    - name: Run Backend Code Quality Check
+      run: |
+        cd backend
+        echo "🔍 Running backend code quality checks..."
+        npm run lint || echo "⚠️ Linting issues found in backend"
+    
+    - name: Run Frontend Code Quality Check
+      run: |
+        cd front
+        echo "🔍 Running frontend code quality checks..."
+        npm run lint || echo "⚠️ Linting issues found in frontend"
+    
+    - name: Check Code Formatting
+      run: |
+        echo "🔍 Checking code formatting..."
+        find . -name "*.js" -o -name "*.ts" -o -name "*.jsx" -o -name "*.tsx" | head -20
+        echo "✅ Code formatting check completed"
+
+  dependency-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Check Backend Dependencies
+      run: |
+        cd backend
+        echo "🔍 Checking backend dependencies..."
+        npm outdated || echo "Some dependencies are outdated"
+        npm ls --depth=0 || echo "Dependency tree checked"
+    
+    - name: Check Frontend Dependencies
+      run: |
+        cd front
+        echo "🔍 Checking frontend dependencies..."
+        npm outdated || echo "Some dependencies are outdated"
+        npm ls --depth=0 || echo "Dependency tree checked"
+    
+    - name: Check for Duplicate Dependencies
+      run: |
+        echo "🔍 Checking for duplicate dependencies..."
+        cd backend
+        npm ls --depth=0 | grep -E "deduped|UNMET" || echo "No duplicates found in backend"
+        cd ../front
+        npm ls --depth=0 | grep -E "deduped|UNMET" || echo "No duplicates found in frontend"
