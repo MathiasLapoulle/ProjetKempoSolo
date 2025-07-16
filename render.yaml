@@ -25,7 +25,6 @@ services:
   - type: web
     name: kempo-frontend
     runtime: static
-    region: frankfurt
     buildCommand: cd front && npm install && npm run build
     staticPublishPath: ./front/build
     routes:
